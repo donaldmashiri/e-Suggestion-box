@@ -22,4 +22,4 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('suggestions', \App\Http\Controllers\SuggestionController::class);
-Route::resource('feedback', \App\Http\Controllers\FeedbackController::class);
+Route::resource('feedbacks', \App\Http\Controllers\FeedbackController::class);

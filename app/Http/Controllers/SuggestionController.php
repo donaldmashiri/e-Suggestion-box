@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Suggestion;
 use Illuminate\Http\Request;
+use Auth;
 
 class SuggestionController extends Controller
 {
@@ -12,7 +13,7 @@ class SuggestionController extends Controller
      */
     public function index()
     {
-        $suggestions = Suggestion::all();
+        $suggestions = Suggestion::orderBy('id', 'desc')->get();
         return view('suggestions.index', compact('suggestions'));
     }
 
@@ -30,15 +31,38 @@ class SuggestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate the input data
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'category' => 'required',
+        ]);
+
+        // Create a new Suggestion instance
+        $suggestion = new Suggestion();
+        $suggestion->title = $validatedData['title'];
+        $suggestion->description = $validatedData['description'];
+        $suggestion->category = $validatedData['category'];
+        $suggestion->user_id =Auth::user()->id;
+
+        // Save the Suggestion
+        $suggestion->save();
+
+        // Redirect the user to the appropriate page
+        return redirect()->route('suggestions.index')
+            ->with('success', 'Suggestion created successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Suggestion $suggestion)
+    public function show(string $id)
     {
-        //
+        $suggestion = Suggestion::findorfail($id);
+
+        // Return the view with the suggestion data
+        return view('suggestions.show', compact('suggestion'));
+
     }
 
     /**
