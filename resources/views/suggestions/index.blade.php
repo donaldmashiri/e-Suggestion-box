@@ -10,7 +10,7 @@
                             {{ __('Suggestions') }}
                         </h5>
                         <div class="justify-content-end">
-                            <a href="" class="btn btn-success btn-sm justify-content-end"> Add Suggestion</a>
+                            <a href="{{route('suggestions.create')}}" class="btn btn-success btn-sm justify-content-end"> Add Suggestion</a>
                         </div>
                     </div>
                     <div class="card-body">
