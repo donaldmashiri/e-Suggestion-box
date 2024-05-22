@@ -52,7 +52,7 @@
                             @endif
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Suggestion') }}</a>
+                                <a class="nav-link" href="{{ route('suggestions.index') }}">{{ __('Suggestion') }}</a>
                             </li>
 
                             <li class="nav-item">

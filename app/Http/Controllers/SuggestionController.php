@@ -12,7 +12,8 @@ class SuggestionController extends Controller
      */
     public function index()
     {
-        //
+        $suggestions = Suggestion::all();
+        return view('suggestions.index', compact('suggestions'));
     }
 
     /**

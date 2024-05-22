@@ -20,3 +20,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::resource('suggestions', \App\Http\Controllers\SuggestionController::class);
+Route::resource('feedback', \App\Http\Controllers\FeedbackController::class);
