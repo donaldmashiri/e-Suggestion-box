@@ -7,43 +7,29 @@
                 <div class="card">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                         <h5 class="fw-bolder">
-                            {{ __('Suggestions') }}
+                            {{ __('Feedbacks') }}
                         </h5>
-                        <div class="justify-content-end">
-                            <a href="{{route('suggestions.create')}}" class="btn btn-success btn-sm justify-content-end"> Add Suggestion</a>
-                        </div>
                     </div>
                     <div class="card-body">
-@include('layouts.messages')
-                        <table class="table table-sm table-bordered table-striped table-responsive-sm">
-                            <thead>
-                            <tr>
-                                <th scope="col">Regnum</th>
-                                <th scope="col">Full Names</th>
-                                <th scope="col">Title</th>
-                                <th scope="col">Category</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Actions</th>
-                            </tr>
-                            </thead>
-                            <tbody>
+                        <div class="row">
                             @foreach($suggestions as $suggestion)
-                                <tr>
-                                    <td> R001 </td>
-                                    <td> Yolanda </td>
-                                    <td> {{$suggestion->title}} </td>
-                                    <td> {{$suggestion->category}} </td>
-                                    <td> {{$suggestion->description}} </td>
-                                    <td> {{$suggestion->status}} </td>
-                                    <td>
-                                        <a href="{{route('suggestions.show', $suggestion->id)}}" class="btn btn-warning btn-sm">View</a>
-                                    </td>
-
-                                </tr>
+                                <div class="col-md-4 mb-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ $suggestion->title }}</h5>
+                                            <p class="card-text">
+                                                <strong>Regnum:</strong> {{ $suggestion->user->regnum }}<br>
+                                                <strong>Full Name:</strong> {{ $suggestion->user->name }}<br>
+                                                <strong>Category:</strong> {{ $suggestion->category }}<br>
+                                                <strong>Description:</strong> {{ $suggestion->description }}<br>
+                                                <strong>Status:</strong> {{ $suggestion->status }}
+                                            </p>
+                                            <a href="{{ route('feedbacks.show', $suggestion->id) }}" class="btn btn-warning btn-sm">Add Feedback</a>
+                                        </div>
+                                    </div>
+                                </div>
                             @endforeach
-                            </tbody>
-                        </table>
+                        </div>
                     </div>
 
 

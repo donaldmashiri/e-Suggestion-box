@@ -52,8 +52,24 @@
                         </h5>
                     </div>
                     <div class="card-body mt-3">
-                        <h4 class="alert alert-danger">No Feed Back yet</h4>
-
+                        @if($feedbacks->count() > 0)
+                            <table class="table table-sm table-bordered table-striped table-responsive-sm">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Notes</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($feedbacks as $feedback)
+                                    <tr>
+                                        <td> {!! $feedback->notes  !!} </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        @else
+                            <h4 class="alert alert-danger">No FeedBack yet</h4>
+                        @endif
                     </div>
 
                 </div>

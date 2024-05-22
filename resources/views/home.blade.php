@@ -35,6 +35,49 @@
                         </div>
                 </div>
             </div>
+
+            @if(Auth::user()->user_type === 'admin')
+                <div class="card mt-3">
+                    <div class="card-header">Dashboard reports</div>
+                    <div class="card-body">
+                        <table class="w-full table table-striped">
+                            <thead>
+                            <tr class="bg-gray-100">
+                                <th class="py-3 px-4 text-left">Description</th>
+                                <th class="py-3 px-4 text-left">Count</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="border-t text-sm">
+                                <td class="py-3 px-4"><i class="fas fa-star text-info"></i> Users Total</td>
+                                <td class="py-3 px-4">{{ $usersCount }}</td>
+                            </tr>
+                            <tr class="border-t text-sm">
+                                <td class="py-3 px-4"><i class="fas fa-clipboard-list text-info"></i> Suggestions Total</td>
+                                <td class="py-3 px-4">{{ $suggestionCount }}</td>
+                            </tr>
+                            <tr class="border-t text-sm">
+                                <td class="py-3 px-4"><i class="fas fa-hourglass-half text-info"></i> Pending Suggestions</td>
+                                <td class="py-3 px-4">{{ $suggestionPending }}</td>
+                            </tr>
+                            <tr class="border-t text-sm">
+                                <td class="py-3 px-4"><i class="fas fa-check-circle text-info"></i> Reviewed Suggestions</td>
+                                <td class="py-3 px-4">{{ $suggestionReviewed }}</td>
+                            </tr>
+                            <tr class="border-t text-sm">
+                                <td class="py-3 px-4"><i class="fas fa-check-double text-info"></i> Implemented Suggestions</td>
+                                <td class="py-3 px-4">{{ $suggestionImplemented }}</td>
+                            </tr>
+
+                            <tr class="border-t text-sm">
+                                <td class="py-3 px-4"><i class="fas fa-check-double text-info"></i> Feedbacks</td>
+                                <td class="py-3 px-4">{{ $feedbackCount }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 </div>

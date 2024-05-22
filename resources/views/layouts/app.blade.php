@@ -51,12 +51,20 @@
                                 </li>
                             @endif
                         @else
+
+
+                        @if(Auth::user()->user_type === 'admin')
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('suggestions.index') }}">{{ __('Suggestion') }}</a>
+                                <a class="nav-link" href="{{ route('feedbacks.index') }}">{{ __('Feedbacks') }}</a>
+                            </li>
+                                <li class="nav-item">
+                                <a class="nav-link" href="{{ route('users.index') }}">{{ __('Users') }}</a>
                             </li>
 
+                            @endif
+
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Feedback') }}</a>
+                                <a class="nav-link" href="{{ route('suggestions.index') }}">{{ __('Suggestions') }}</a>
                             </li>
 
                             <li class="nav-item dropdown">
@@ -86,5 +94,8 @@
             @yield('content')
         </main>
     </div>
+
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
+    <script type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>
 </body>
 </html>

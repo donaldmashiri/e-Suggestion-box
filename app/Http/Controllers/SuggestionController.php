@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Feedback;
 use App\Models\Suggestion;
 use Illuminate\Http\Request;
 use Auth;
@@ -58,10 +59,10 @@ class SuggestionController extends Controller
      */
     public function show(string $id)
     {
-        $suggestion = Suggestion::findorfail($id);
+        $suggestion = Suggestion::findOrFail($id);
+        $feedbacks = Feedback::where('suggestion_id', $suggestion->id)->get();
 
-        // Return the view with the suggestion data
-        return view('suggestions.show', compact('suggestion'));
+        return view('suggestions.show', compact('suggestion', 'feedbacks'));
 
     }
 

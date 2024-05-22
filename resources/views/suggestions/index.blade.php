@@ -30,8 +30,8 @@
                             <tbody>
                             @foreach($suggestions as $suggestion)
                                 <tr>
-                                    <td> R001 </td>
-                                    <td> Yolanda </td>
+                                    <td> {{$suggestion->user->regnum}} </td>
+                                    <td> {{$suggestion->user->name}} </td>
                                     <td> {{$suggestion->title}} </td>
                                     <td> {{$suggestion->category}} </td>
                                     <td> {{$suggestion->description}} </td>

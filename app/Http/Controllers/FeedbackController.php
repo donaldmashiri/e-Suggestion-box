@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Feedback;
+use App\Models\Suggestion;
 use Illuminate\Http\Request;
+use Auth;
 
 class FeedbackController extends Controller
 {
@@ -12,7 +14,8 @@ class FeedbackController extends Controller
      */
     public function index()
     {
-        //
+        $suggestions = Suggestion::orderBy('id', 'desc')->get();
+        return view('feedbacks.index', compact('suggestions'));
     }
 
     /**
@@ -28,15 +31,29 @@ class FeedbackController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $feed  = Feedback::create([
+            'suggestion_id' => $request->suggestion_id,
+            'notes' => $request->notes,
+            'user_id' => Auth::user()->id
+        ]);
+
+        $suggestion = Suggestion::findOrFail($request->input('suggestion_id'));
+        $suggestion->status = $request->input('status');
+        $suggestion->save();
+
+        return back()
+            ->with('success', 'Suggestion created successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Feedback $feedback)
+    public function show(string $id)
     {
-        //
+        $suggestion = Suggestion::findOrFail($id);
+        $feedbacks = Feedback::where('suggestion_id', $suggestion->id)->get();
+
+        return view('feedbacks.show', compact('suggestion', 'feedbacks'));
     }
 
     /**
@@ -58,8 +75,12 @@ class FeedbackController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Feedback $feedback)
+    public function destroy($id)
     {
-        //
+        $feedback = Feedback::findOrFail($id);
+        $suggestion_id = $feedback->suggestion_id;
+        $feedback->delete();
+
+        return redirect()->route('feedbacks.show', $suggestion_id)->with('success', 'Feedback deleted successfully.');
     }
 }
